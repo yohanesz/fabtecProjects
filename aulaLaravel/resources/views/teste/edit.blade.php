@@ -35,6 +35,7 @@
                     <input type="email" name="email" id="email" class="form-control" value="{{ $item->email}}">
                 </div>
                 <br>
+            
                 <div class="d-flex justify-content-center">
                     <button type="submit" class="btn btn-dark" name="envia">Enviar</button>
                 </div>

@@ -37,13 +37,11 @@ class Aula04Controller extends Controller
         $aluno->nome = $request->input('nome');
         $aluno->email = $request->input('email');
 
-         //    try {
-    //        $aluno->save();
-    //    } catch (\Exception $e) {
-
-    //    }
-
-
+        try {
+           $aluno->save();
+       } catch (\Exception $e) {
+        
+       }
 
         return redirect()->route('aula4.index');
     }
@@ -79,11 +77,11 @@ class Aula04Controller extends Controller
        $aluno->nome = $request->input('nome');
        $aluno->email = $request->input('email');
 
-    //    try {
-    //        $aluno->save();
-    //    } catch (\Exception $e) {
+       try {
+           $aluno->save();
+       } catch (\Exception $e) {
 
-    //    }
+       }
 
 
         return redirect()->route('aula4.index');
