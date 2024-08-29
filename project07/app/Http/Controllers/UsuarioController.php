@@ -63,13 +63,8 @@ class UsuarioController extends Controller
         $usuario->nome = $request->input('nome');
         $usuario->email = $request->input('email');
         $usuario->data_nascimento = Carbon::createFromFormat('Y-m-d', $request->input('dataNascimento'));
-        $setorSelecionado = $request->input('setorSelecionado');
 
-        if ($setorSelecionado && Setor::find($setorSelecionado)) {
-            $usuario->setor_id = $setorSelecionado;
-        } else {
-            $usuario->setor_id = null; 
-        }
+        $usuario->setor_id = $request->input('setorSelecionado');
         
         $usuario->senha = $request->input('senha');
         

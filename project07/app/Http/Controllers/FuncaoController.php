@@ -57,24 +57,38 @@ class FuncaoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(funcao $funcao)
+    public function edit(string $id)
     {
-        //
+        $funcao = Funcao::find($id);
+
+        return view('funcao.edit', ['funcao' => $funcao]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, funcao $funcao)
+    public function update(Request $request, string $id)
     {
-        //
+        $funcao = Funcao::find($id);
+
+        $funcao->descricao = $request->input('descricao');
+        try {
+            $funcao->save();
+        } catch (\Exception $e) {
+        }
+
+        return redirect()->route('funcao.index');
+        
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(funcao $funcao)
+    public function destroy(string $id)
     {
-        //
+        $funcao = Funcao::find($id);
+        $funcao->delete();
+
+        return redirect()->route('funcao.index');
     }
 }
