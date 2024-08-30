@@ -10,15 +10,15 @@
 </head>
 <body>
 
-    <h1 class="display-5">índex funcao</h1>
+    <h1 class="display-5">índex funcao_usuarios</h1>
 
     @include('navbar')
     <br>
 
     <div class="d-flex justify-content-between mb-3">
-        <form action="{{ route('funcao.index') }}" method="get">
+        <form action="{{ route('funcao_usuarios.index') }}" method="get">
             <div class="d-flex gap-2">
-                <input placeholder="Pesquisar funcao" class="form-control" type="text" name="filtro" id="filtro" value="{{ $filtro }}" style="margin-left: 20px;">
+                <input placeholder="Pesquisar funcao_usuarios" class="form-control" type="text" name="filtro" id="filtro" value="{{ $filtro }}" style="margin-left: 20px;">
                 <button class="btn btn-light border-secondary" type="submit">
                     <span class="d-flex align-items-center gap-1 text-secondary">
                         <i class="ri-search-line"></i>
@@ -28,10 +28,10 @@
             </div>
         </form>
 
-        <a href="{{ route('funcao.create') }}" class="btn btn-light-green border-green text-green" style="margin-right:20px; border: 1px solid rgb(0, 138, 0); background-color: rgb(117, 179, 117);>
+        <a href="{{ route('funcao_usuarios.create') }}" class="btn btn-light-green border-green text-green" style="margin-right:20px; border: 1px solid rgb(0, 138, 0); background-color: rgb(117, 179, 117);>
             <span class="d-flex align-items-center gap-1">
                 <i class="ri-add-line"></i>
-                Novo funcao
+                Novo funcao_usuarios
             </span>
         </a>
     </div>
@@ -42,24 +42,24 @@
             <th scope="col">Id</th>  <th scope="col">Descricao</th>  <th scope="col"></th> <th scope="col"></th><th scope="col"></th><th scope="col">Detalhar</th> <th scope="col">Alterar</th> <th scope="col">Excluir</th>
         </tr>
         </thead>
-        @foreach ($info as $item)
+        @foreach ($usuarios as $item)
 
         <tr">
-            <td>{{$item->id}}</td>
-            <td>{{$item->descricao}}</td> 
+            <td>{{$item->nome}}</td>
+            <td>{{$item->email}}</td> 
             <td></td>
             <td></td>
             <td></td>
             
 
             <td>
-                <a href="{{route('funcao.show', $item->id)}}"><button class="btn btn-dark">Detalhes</button></a>
+                <a href="{{route('funcao_usuarios.show', $item->id)}}"><button class="btn btn-dark">Detalhes</button></a>
             </td>
             <td>
-                <a href="{{route('funcao.edit', $item->id)}}"><button class="btn btn-dark">Alterar</button></a>
+                <a href="{{route('funcao_usuarios.edit', $item->id)}}"><button class="btn btn-dark">Alterar</button></a>
             </td>
             <td>
-                <form action="{{route('funcao.destroy', $item->id)}}" method="post" name="delete">
+                <form action="{{route('funcao_usuarios.destroy', $item->id)}}" method="post" name="delete">
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger" name="envia">Deletar</button>
                 </form>

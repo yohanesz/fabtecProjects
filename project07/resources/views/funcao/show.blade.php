@@ -27,5 +27,23 @@
        
         </tr>
     </table>
+
+    <br>
+    <h2>Cadastrados na função: </h2>
+    <br>
+
+    <table class="table table-hover" border="1px">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>  <th scope="col">Nome</th>
+        </tr>
+        </thead>
+        @foreach($usuario as $item)
+        <tr>
+            <td>{{$item->id}}</td>
+            <td>{{$item->nome}}</td> 
+        </tr>
+        @endforeach
+    </table>
 </body>
 </html>

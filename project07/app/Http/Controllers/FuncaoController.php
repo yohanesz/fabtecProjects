@@ -50,8 +50,12 @@ class FuncaoController extends Controller
     public function show(string $id)
     {
         $funcao = Funcao::find($id);
+        $usuario = $funcao->usuario()->get();
 
-        return view('funcao.show', ['funcao' => $funcao]);
+        if ($usuario == null) {
+            $usuario = collect(); 
+        }
+        return view('funcao.show', ['funcao' => $funcao, 'usuario' => $usuario]);
     }
 
     /**

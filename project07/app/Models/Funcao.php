@@ -10,6 +10,6 @@ class Funcao extends Model
     use HasFactory;
 
     public function usuario() {
-        return $this->belongsToMany('App\Models\Usuario', 'Funcao_usuario');
+        return $this->belongsToMany('App\Models\Usuario', 'funcao_usuarios');
     }
 }
