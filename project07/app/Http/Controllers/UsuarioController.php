@@ -18,7 +18,6 @@ class UsuarioController extends Controller
     public function index(Request $request)
     {
         $info = Usuario::all();
-        $setores = Setor::all();
 
         $query = Usuario::query();
 
@@ -49,7 +48,6 @@ class UsuarioController extends Controller
     public function create()
     {
         $setores = Setor::all();
-
         return view('usuario.create', ['setores' => $setores]);
     }
 
@@ -124,6 +122,7 @@ class UsuarioController extends Controller
         $usuario->email = $request->input('email');
         $usuario->data_nascimento = Carbon::createFromFormat('Y-m-d', $request->input('dataNascimento'));
         $usuario->setor_id = $request->input('setorSelecionado');
+        $usuario->senha = $request->input('senha');
 
         try {
             $usuario->save();
@@ -150,9 +149,9 @@ class UsuarioController extends Controller
     
             $usuario->delete();
     
-            return redirect()->route('usuario.index')->with('toast', ['type' => 'success', 'message' => 'Usuário e perfil (se existente) deletados com sucesso.']);
+            return redirect()->route('usuario.index');
         } catch (\Exception $e) {
-            return redirect()->route('usuario.index')->with('toast', ['type' => 'danger', 'message' => 'Erro ao deletar usuário ou perfil: ' . $e->getMessage()]);
+            return redirect()->route('usuario.index');
         }
     }
 }

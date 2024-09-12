@@ -89,13 +89,22 @@ class PerfilController extends Controller
     public function edit(string $id)
     {
         try {
+            // Carrega o perfil atual
             $perfil = Perfil::findOrFail($id);
+            
+            // Carrega os usuários disponíveis, incluindo o usuário atual do perfil
+            $usersDisponiveis = Usuario::leftJoin('perfils', 'usuarios.id', '=', 'perfils.usuario_idusuario')
+                ->whereNull('perfils.usuario_idusuario')
+                ->orWhere('usuarios.id', $perfil->usuario_idusuario)  // Inclui o usuário atual associado ao perfil
+                ->select('usuarios.*')
+                ->get();
         } catch (\Exception $e) {
-            return redirect()->route('perfil.index')->with('toast', ['type' => 'danger', 'message' => 'Erro ao carregar perfil para edição: ' . $e->getMessage()]);
+            return redirect()->route('perfil.index')->with('toast', ['type' => 'danger', 'message' => 'Erro ao carregar dados: ' . $e->getMessage()]);
         }
-
-        return view('perfil.edit', ['perfilSelecionado' => $perfil]);
+    
+        return view('perfil.edit', ['perfilSelecionado' => $perfil, 'usuarios' => $usersDisponiveis]);
     }
+    
 
     /**
      * Update the specified resource in storage.
@@ -109,6 +118,7 @@ class PerfilController extends Controller
         try {
             $perfil = Perfil::findOrFail($id);
             $perfil->descricao = $request->input('descricao');
+            $perfil->usuario_idusuario = $request->input('usuario');
             $perfil->save();
         } catch (QueryException $qe) {
             return redirect()->route('perfil.edit', $id)->with('toast', ['type' => 'danger', 'message' => 'Erro ao atualizar perfil: ' . $qe->getMessage()]);
