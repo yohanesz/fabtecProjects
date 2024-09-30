@@ -9,6 +9,13 @@ class Usuario extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'nome',
+        'email',
+        'senha',
+        'data_nascimento'
+    ];
+
     public function funcao() {
         return $this->belongsToMany(Funcao::class, 'funcao_usuarios')->withPivot('dataInicio');
     }
